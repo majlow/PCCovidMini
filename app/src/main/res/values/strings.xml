@@ -29,6 +29,7 @@
     <string name="nav_account">Account</string>
     <string name="input_email">Enter your email</string>
     <string name="resetPass">Reset Password</string>
+    <string name="numberOfVaccine">Number of vaccine</string>
 
 
     <string name="navigation_drawer_open">Open navigation drawer</string>

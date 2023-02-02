@@ -1,5 +1,7 @@
 package com.example.pccovidmini;
 
+import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -29,12 +31,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private EditText editNationalID;
     private EditText editAddress;
     private EditText editPhoneNumber;
+    private EditText editNumberVaccine;
     private EditText editEmail;
     private EditText editPassword;
     private ProgressBar progressBar;
     private FirebaseAuth mAuth;
+    private ProgressDialog progressDialog;
 
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,9 +55,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         editEmail = (EditText) findViewById(R.id.email);
         editPassword = (EditText) findViewById(R.id.password);
         editDateOfBirth = (EditText) findViewById(R.id.dateOfBirth);
-        editSocialInsurance = (EditText) findViewById(R.id.social_isurance);
+        editSocialInsurance = (EditText) findViewById(R.id.social_insurance);
         editAddress = (EditText) findViewById(R.id.address);
         editPhoneNumber = (EditText) findViewById(R.id.phoneNum);
+        editNumberVaccine = (EditText) findViewById(R.id.numberVaccine);
+
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
     }
@@ -77,6 +84,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         String nationalID = editNationalID.getText().toString().trim();
         String address = editAddress.getText().toString().trim();
         String phoneNum = editPhoneNumber.getText().toString().trim();
+        String numberVaccine = editNumberVaccine.getText().toString().trim();
         String email = editEmail.getText().toString().trim();
         String password= editPassword.getText().toString().trim();
 
@@ -127,6 +135,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             editPhoneNumber.requestFocus();
             return;
         }
+        if (TextUtils.isEmpty(numberVaccine)) {
+            editPhoneNumber.requestFocus();
+            editPhoneNumber.setError("This field is required");
+            return;
+        }
+        if (numberVaccine.length()!=1){
+            editPhoneNumber.setError("Number of Vaccine length should be 1 characters!");
+            editPhoneNumber.requestFocus();
+            return;
+        }
         if (TextUtils.isEmpty(email)) {
             editEmail.requestFocus();
             editEmail.setError("This field is required");
@@ -148,13 +166,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             return;
         }
         progressBar.setVisibility(View.VISIBLE);
+
         mAuth.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-
                         if (task.isSuccessful()) {
-                            User user = new User(fullName, email,phoneNum, address, dateOfBirth, nationalID,socialInsurance);
+                            User user = new User(fullName, email,phoneNum, address, dateOfBirth, nationalID,socialInsurance, numberVaccine, password);
 
                             FirebaseDatabase.getInstance().getReference("Users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -165,6 +183,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                             if (task.isSuccessful()) {
                                                 Toast.makeText(RegisterActivity.this, "User has been registered successfully!", Toast.LENGTH_LONG).show();
                                                 progressBar.setVisibility(View.GONE);
+                                                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
 
                                             } else
                                                 Toast.makeText(RegisterActivity.this, "Failed to register! Try again!", Toast.LENGTH_LONG).show();

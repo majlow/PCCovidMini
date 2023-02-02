@@ -6,6 +6,14 @@
     android:orientation="vertical"
     android:padding="20dp">
 
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_ava"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_baseline_person_24" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="126dp"
@@ -24,7 +32,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Nguyễn Quốc Hoàng"
                 android:textColor="#201F1F"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -50,18 +57,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="123456789"
                     android:textSize="20sp" />
             </LinearLayout>
 
+
+
+
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/img_user"
-            android:layout_width="198dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/avatar" />
+
 
     </LinearLayout>
 
@@ -87,8 +91,7 @@
             android:layout_weight="1"
             android:ems="10"
             android:gravity="right"
-            android:inputType="textPersonName"
-            android:text="11/09/2000" />
+            android:inputType="textPersonName" />
     </LinearLayout>
 
     <LinearLayout
@@ -113,8 +116,7 @@
             android:layout_weight="1"
             android:ems="10"
             android:gravity="right"
-            android:inputType="textPersonName"
-            android:text="2155123123" />
+            android:inputType="textPersonName" />
     </LinearLayout>
 
     <LinearLayout
@@ -139,8 +141,7 @@
             android:layout_weight="1"
             android:ems="10"
             android:gravity="right"
-            android:inputType="textPersonName"
-            android:text="0123456789" />
+            android:inputType="textPersonName" />
 
     </LinearLayout>
 
@@ -166,8 +167,32 @@
             android:layout_weight="1"
             android:ems="10"
             android:gravity="right"
+            android:inputType="textPersonName" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/editTextTextPersonName11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
             android:inputType="textPersonName"
-            android:text="Dĩ An, Bình Dương" />
+            android:text="Số mũi tiêm" />
+
+        <EditText
+            android:id="@+id/tv_numOfVaccine_management"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:gravity="right"
+            android:inputType="textPersonName" />
     </LinearLayout>
 
 </LinearLayout>
