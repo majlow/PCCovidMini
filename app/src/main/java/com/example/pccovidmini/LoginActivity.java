@@ -3,6 +3,7 @@ package com.example.pccovidmini;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,107 +16,103 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     // creating variables for our edit text and buttons.
-    private EditText editTextEmail, editTextPassword;
-    private TextView register, ForgotPassword;
-    private Button  signIn;
-    private FirebaseAuth mAuth;
-    private ProgressBar progressBar;
+    private Context context;
+    private EditText editEmail, editPassWord;
+//    private Button  loginBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        register = (TextView) findViewById(R.id.register);
-        register.setOnClickListener(this);
+        context = this;
 
-        signIn = (Button) findViewById(R.id.signIn);
-        signIn.setOnClickListener(this);
-
-        editTextEmail = (EditText) findViewById(R.id.email);
-        editTextPassword = (EditText) findViewById(R.id.password);
-
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
-
-        mAuth = FirebaseAuth.getInstance();
-        ForgotPassword = (TextView) findViewById(R.id.forgotpassword);
-        ForgotPassword.setOnClickListener(this);
+        connectView();
     }
+    private void connectView() {
+        editEmail = (EditText) findViewById(R.id.et_email);
+        editPassWord = (EditText) findViewById(R.id.et_passWord);
 
+        findViewById(R.id.btn_login).setOnClickListener(this);
+        findViewById(R.id.tv_register).setOnClickListener(this);
+        findViewById(R.id.tv_forgotPass).setOnClickListener(this);
+
+    }
     @Override
     public void onClick(View view) {
         int id = view.getId();
         switch (id) {
-            case R.id.signIn:
-                userLogin();
+            case R.id.btn_login:
+                login();
                 break;
-            case R.id.register:
-                startActivity(new Intent(this, RegisterActivity.class));
+            case R.id.tv_register:
+                register();
                 break;
-            case R.id.forgotpassword:
-                startActivity(new Intent(this,ForgotPassword.class));
+            case R.id.tv_forgotPass:
+                forgotPass();
                 break;
         }
     }
-    private void userLogin() {
+    private void login() {
 //        boolean error = false;
         // get data
-        String email = editTextEmail.getText().toString().trim();
-        String password = editTextPassword.getText().toString().trim();
+        String email = editEmail.getText().toString().trim();
+        String passWord = editPassWord.getText().toString().trim();
         // National ID empty
-        if (email.isEmpty()){
-            editTextEmail.setError("Email is required");
-            editTextEmail.requestFocus();
-            return;
+        if (TextUtils.isEmpty(email)) {
+            editEmail.setError(context.getResources().getString(R.string.error_field_required));
+            editEmail.requestFocus();
+            error = true;
         }
-
         if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            editTextEmail.setError("Please provide valid email!");
-            editTextEmail.requestFocus();
-            return;
+            editEmail.setError("Please provide valid email!");
+            editEmail.requestFocus();
+            error = true;
         }
-        if (password.isEmpty()){
-            editTextPassword.setError("Password is required");
-            editTextPassword.requestFocus();
-            return;
+        if (TextUtils.isEmpty(passWord)) {
+            editPassWord.setError(context.getResources().getString(R.string.error_field_required));
+            editPassWord.requestFocus();
+            error = true;
         }
-        if (password.length()<=7){
-            editTextPassword.setError("Min password length should be more than 7 characters!");
-            editTextPassword.requestFocus();
-            return;
+        if (passWord.length()<=7){
+            editPassWord.setError("Min password length should be more than 7 characters!");
+            editPassWord.requestFocus();
+            error = true;
         }
-        progressBar.setVisibility(View.VISIBLE);
-        mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
 
-                if (task.isSuccessful()) {
-                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        // all data is ok
 
-                    if(user.isEmailVerified()){
-                        //redirect to user profile
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                        progressBar.setVisibility(View.GONE);
-                    }else {
-                        user.sendEmailVerification();
-                        Toast.makeText(LoginActivity.this,"Check your email to verify your account!",Toast.LENGTH_LONG).show();
-                        progressBar.setVisibility(View.GONE);
-                    }
-                } else {
-                    Toast.makeText(LoginActivity.this, "Failed to Login! Please check your credentials!", Toast.LENGTH_LONG).show();
-                    progressBar.setVisibility(View.GONE);
-                }
-            }
-        });
+        if (!error) {
+            // create intent to show Main Activity
+            Intent intent = new Intent(context, MainActivity.class);
 
-}}
+//            // send data if need
+//            intent.putExtra("National ID", email);
+
+            // start Main Activity
+            startActivity(intent);
+        }
+    }
+    private void register() {
+        Intent intent = new Intent(context, RegisterActivity.class);
+
+        // send data if need
+
+        // start Main Activity
+        startActivity(intent);
+    }
+
+    private void forgotPass() {
+        Intent intent = new Intent(context, otp_code.class);
+
+        // send data if need
+
+        // start Main Activity
+        startActivity(intent);
+    }
+
+}
 

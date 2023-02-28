@@ -88,7 +88,7 @@
                 android:layout_height="match_parent">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/social_insurance"
+                    android:id="@+id/social_isurance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#F3FFFFFF"
@@ -153,21 +153,6 @@
                     android:layout_height="wrap_content"
                     android:background="#F3FFFFFF"
                     android:hint="@string/phone_number"
-                    android:textSize="18sp"
-                    android:textStyle="italic"
-                    android:inputType="number"/>
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/numberVaccine"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#F3FFFFFF"
-                    android:hint="@string/numberOfVaccine"
                     android:textSize="18sp"
                     android:textStyle="italic"
                     android:inputType="number"/>

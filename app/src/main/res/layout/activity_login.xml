@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/email"
+                    android:id="@+id/et_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="18dp"
@@ -61,7 +61,7 @@
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/password"
+                    android:id="@+id/et_passWord"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="18dp"
@@ -88,7 +88,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/signIn"
+                    android:id="@+id/btn_login"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="0dp"
@@ -102,7 +102,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/forgotpassword"
+                    android:id="@+id/tv_forgotPass"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -111,7 +111,7 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/register"
+                    android:id="@+id/tv_register"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -120,14 +120,7 @@
                     android:text="@string/register"
                     android:textSize="16sp" />
             </LinearLayout>
-            <ProgressBar
-                android:id="@+id/progressBar"
-                style="?android:attr/progressBarStyleLarge"
-                android:layout_width="65dp"
-                android:layout_height="56dp"
-                android:layout_centerInParent="true"
-                android:visibility="gone"
-                tools:ignore="MissingConstraints" />
+
 
         </LinearLayout>
 

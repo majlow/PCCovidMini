@@ -28,7 +28,6 @@
             android:layout_weight="1"
             android:gravity="center"
             android:textSize="20sp"
-            android:textStyle="bold"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
             android:text="FORGOT PASSWORD"/>
@@ -44,7 +43,7 @@
             android:orientation="horizontal">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/email"
+                android:id="@+id/editEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="18dp"
@@ -62,32 +61,19 @@
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
         <Button
-            android:id="@+id/resetpassword"
-            android:layout_width="wrap_content"
+            android:id="@+id/reset_pass"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="0dp"
             android:layout_weight="1"
-            android:backgroundTint="#B58C8C"
             android:text="@string/resetPass" />
-
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:orientation="vertical">
 
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:visibility="gone" />
-    </LinearLayout>
 
 </LinearLayout>
